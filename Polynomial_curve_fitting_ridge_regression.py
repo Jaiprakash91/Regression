@@ -37,7 +37,7 @@ class Regression:
     self.w=XTX_inv.dot(XTY)
     
 data=generate_data(20)
-Reg=Regression(10,0);
+Reg=Regression(10,.5);
 Reg.training(data)
 w=Reg.w;
 print w;
