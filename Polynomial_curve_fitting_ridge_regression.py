@@ -15,9 +15,10 @@ def generate_data(n):
   return data;
 
 class Regression:
-  def __init__(self,M=1):
+  def __init__(self,M=1,lamb=.5):
     self.M=M
     self.w=rand(M+1)*2-1
+    self.lamb=lamb;
 
   def y(self,x):
     s=0
@@ -31,12 +32,12 @@ class Regression:
     for i in range(n):
       for j in range(self.M+1):
         X[i,j]=data[i,0]**j
-    XTX_inv=inv((X.T).dot(X))
+    XTX_inv=inv((X.T).dot(X) + self.lamb*np.identity(self.M+1))
     XTY=(X.T).dot(data[:,1])
     self.w=XTX_inv.dot(XTY)
     
 data=generate_data(20)
-Reg=Regression(13);
+Reg=Regression(10,0);
 Reg.training(data)
 w=Reg.w;
 print w;
